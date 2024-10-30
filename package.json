@@ -5,12 +5,27 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "electron-builder"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
+    
+  },
+  "devDependencies": {
+    "electron-builder": "^25.1.8",
     "electron": "^33.0.2"
+  },
+  "build": {
+    "appId": "com.hackergames.hackergameslauncher",
+    "productName": "HackerGames Launcher",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
   }
 }
