@@ -1,17 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Launcher</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Welcome to My Game Launcher</h1>
-    <div id="game-list">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HACKERGAMES</title>
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+
+        <!-- Bulma Framework -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        />
+
+        <style>
+            /* If site is in dark mode invert */
+            @media (prefers-color-scheme: dark) {
+                .invert {
+                    filter: invert(1);
+                }
+            }
+
+            /* styling for normal navbar-item (Desktop) */
+            .navbar-item.is-selected {
+                background-color: transparent;
+                color: #3273dc;
+                font-weight: bold;
+                border-bottom: 2px solid #3273dc;
+            }
+
+            /* styling for the dropdown-items in navbar */
+            .navbar-dropdown .navbar-item.is-selected {
+                background-color: #3273dc;
+                color: white;
+            }
+
+            /* styling for burger-menu (Mobile) */
+            @media screen and (max-width: 1024px) {
+                .navbar-menu .navbar-item.is-selected {
+                    background-color: #3273dc; /* Blaue Hintergrundfarbe für ausgewählte Elemente */
+                    color: white; /* Weiße Schrift auf blauem Hintergrund */
+                    border-bottom: none; /* Entfernt die Unterstreichung */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <img src="/img/logo-no-background.png" class="invert"/>
+                </a>
+
+                <a class="navbar-item is-selected"> Home </a>
+                <a class="navbar-item"> Browse </a>
+
+                <!--
+                <a
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    data-target="navbarMenu"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a> -->
+            </div>
+
+            <!--
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item is-selected"> Home </a>
+
+                    <a class="navbar-item"> Browse </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link"> More </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item"> About Us </a>
+                            <a class="navbar-item"> Contact </a>
+                            <hr class="navbar-divider" />
+                            <a
+                                class="navbar-item"
+                                href="https://github.com/lutz-stu/minizombay-software/issues"
+                                target="”_blank”"
+                            >
+                                <img
+                                    src="/img/external-link.svg"
+                                    class="invert"
+                                />
+                                &nbsp;Report an issue on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a
+                                class="button is-link"
+                                href="https://minihacker3000.itch.io"
+                                target="”_blank”"
+                            >
+                                <span class="icon-text">
+                                    <span class="icon">
+                                        <img
+                                            src="/img/external-link.svg"
+                                            style="filter: invert(1)"
+                                        />
+                                    </span>
+                                    <span>Minihacker3000 on itch.io</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+        </nav>
+
+        <section class="section">
+            <div class="container">
+                <div class="box">
+                    <div class="columns is-vcentered">
+                        <!-- Left side with text and button -->
+                        <div class="column is-two-third">
+                            <header class="title is-2">Download Little Farming Game on the Play Store!</header>
+                            <div class="has has-text-centered">
+                                <a href="https://play.google.com/store/apps/details?id=yourgameid" target="_blank" class="button is-primary">
+                                    Get it!
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Right side with image -->
+                        <div class="column is-one-third has-text-centered">
+                            <figure class="image">
+                                <img src="img/little-faming-game2.jpg" alt="Little Farming Game">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+
+        <section class="section">
+            <div class="container">
+                <div class="box" style="border-radius: 15px; padding: 20px">
+                    <div class="title is-2">The newest Games</div>
+                    <div class="columns is-multiline">
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/war-of-memes.png"
+                                            alt="War Of Memes"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">WarOfMemes</p>
+                                    <p class="subtitle is-6">
+                                        Local Muliplayer
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/just-click.png"
+                                            alt="Just Click"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">JustClick</p>
+                                    <p class="subtitle is-6">Clicker game</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/little-farming-game.png"
+                                            alt="Little Farming Game"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">
+                                        Little-Farming-Game
+                                    </p>
+                                    <p class="subtitle is-6">Tycoon</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/easteregg-hunt.png"
+                                            alt="Easteregg Hunt"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">Easteregg-Hunt</p>
+                                    <p class="subtitle is-6">Easter Game</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/troll_adventure.png"
+                                            alt="Troll Adventure"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">Troll Adventure</p>
+                                    <p class="subtitle is-6">Adventure</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/destroy-simulator.png"
+                                            alt="Destroy Simulator"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">Destroy-Simulator</p>
+                                    <p class="subtitle is-6">Simulation</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="column is-3">
+                            <div class="card">
+                                <div class="card-image">
+                                    <figure class="image">
+                                        <img
+                                            src="/img/escapethespike.png"
+                                            alt="Escape The Spike!"
+                                        />
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <p class="title is-5">Escape The Spike!</p>
+                                    <p class="subtitle is-6">Adventure</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="has-text-centered">
+                        <a
+                            class="button is-primary is-medium"
+                            href="browse.html"
+                            >All Games</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <button onclick="launchGame('path/to/game1.exe')">Play Game 1</button>
-        <button onclick="launchGame('path/to/game2.exe')">Play Game 2</button>
-    </div>
-    <script src="renderer.js"></script>
-</body>
+
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Hackergames</strong> v.0.2.0-alpha. (For private use
+                    only!) All rights reserved. Content may not be used or
+                    reproduced without explicit permission.
+                </p>
+                <a href="index_old.html">Old Design</a>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(
+                    document.querySelectorAll(".navbar-burger"),
+                    0
+                );
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach((el) => {
+                    el.addEventListener("click", () => {
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle("is-active");
+                        $target.classList.toggle("is-active");
+                    });
+                });
+            });
+        </script>
+    </body>
 </html>
