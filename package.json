@@ -1,7 +1,7 @@
 {
   "name": "hackergames-launcher",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "HACKERGAMES Launcher to start games created by Minihacker3000",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -20,12 +20,19 @@
   },
   "build": {
     "appId": "com.hackergames.hackergameslauncher",
-    "productName": "HackerGames Launcher",
+    "productName": "HACKERGAMES Launcher",
     "directories": {
       "output": "dist"
     },
     "win": {
       "target": "nsis"
+    },
+    "files": [
+      "resources/**/*",
+      "index.html",
+      "main.js",
+      "renderer.js",
+      "img/*"
+    ]
     }
-  }
 }

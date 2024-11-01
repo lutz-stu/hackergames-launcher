@@ -3,12 +3,13 @@ const path = require('path');
 
 function createWindow() {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1280,
+        height: 750,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             nodeIntegration: true,
-            contextIsolation: false,
+            contextIsolation: true,
+            additionalArguments: [`--appPath=${app.getAppPath()}`]
         }
     });
 
@@ -16,7 +17,6 @@ function createWindow() {
 }
 
 app.on('ready', createWindow);
-
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });

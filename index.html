@@ -74,7 +74,7 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                    <img src="/img/logo-no-background.png" class="invert" />
+                    <img src="./img/logo-no-background.png" class="invert" />
                 </a>
 
                 <!--
@@ -151,32 +151,6 @@
             -->
         </nav>
 
-        <!--
-        <section class="section">
-            <div class="container">
-                <div class="box">
-                    <div class="columns is-vcentered">
-                        Left side with text and button 
-                        <div class="column is-two-third">
-                            <header class="title is-2">Download Little Farming Game on the Play Store!</header>
-                            <div class="has has-text-centered">
-                                <a href="https://play.google.com/store/apps/details?id=yourgameid" target="_blank" class="button is-primary">
-                                    Get it!
-                                </a>
-                            </div>
-                        </div>
-                        Right side with image 
-                        <div class="column is-one-third has-text-centered">
-                            <figure class="image">
-                                <img src="img/little-faming-game2.jpg" alt="Little Farming Game">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        -->
-
         <section class="section">
             <div class="container">
                 <div class="box" style="border-radius: 15px; padding: 20px">
@@ -188,7 +162,7 @@
                                     <div class="card-image">
                                         <figure class="image is-4by3">
                                             <img
-                                                src="/img/war-of-memes.png"
+                                                src="./img/war-of-memes.png"
                                                 alt="War Of Memes"
                                             />
                                         </figure>
@@ -203,7 +177,7 @@
                                 <div class="hover-text">
                                     <button
                                         class="button is-primary is-medium"
-                                        onclick="launchGame('games/escapethespike/EscapeTheSpike!.exe')"
+                                        onclick="launchGame('recources/games/escapethespike/EscapeTheSpike!.exe')"
                                     >
                                         Play Game
                                     </button>
@@ -224,40 +198,6 @@
             </div>
         </section>
 
-        <!--
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    <strong>Hackergames</strong> v.0.2.0-alpha. (For private use
-                    only!) All rights reserved. Content may not be used or
-                    reproduced without explicit permission.
-                </p>
-                <a href="index_old.html">Old Design</a>
-            </div>
-        </footer>
-        -->
-
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
-                // Get all "navbar-burger" elements
-                const $navbarBurgers = Array.prototype.slice.call(
-                    document.querySelectorAll(".navbar-burger"),
-                    0
-                );
-
-                // Add a click event on each of them
-                $navbarBurgers.forEach((el) => {
-                    el.addEventListener("click", () => {
-                        // Get the target from the "data-target" attribute
-                        const target = el.dataset.target;
-                        const $target = document.getElementById(target);
-
-                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                        el.classList.toggle("is-active");
-                        $target.classList.toggle("is-active");
-                    });
-                });
-            });
-        </script>
+        <script src="renderer.js"></script>
     </body>
 </html>
