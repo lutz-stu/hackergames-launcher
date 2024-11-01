@@ -1,14 +1,14 @@
 const { exec } = require('child_process');
 
-function launchGame(gamePath) {
-    const fullPath = window.electronAPI.getGamePath(gamePath);
-    exec("${fullPath}", (error, stdout, stderr) => {
+function launchGame(path) {
+    exec(`"${path}"`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Error starting game: ${error}`);
+            console.error(`Error starting game: ${stderr || error}`);
             return;
         }
-        console.log(`Game started: ${stdout}`);
+        console.log(`Game started successfully.`);
     });
 }
+
 
 console.log("Launcher Started");

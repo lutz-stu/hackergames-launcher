@@ -28,7 +28,6 @@
       "target": "nsis"
     },
     "files": [
-      "resources/**/*",
       "index.html",
       "main.js",
       "renderer.js",
