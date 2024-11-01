@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>HACKERGAMES</title>
-        <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+        <title>HACKERGAMES Launcher</title>
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
 
         <!-- Bulma Framework -->
         <link
@@ -20,7 +20,7 @@
                 }
             }
 
-            /* styling for normal navbar-item (Desktop) */
+            /* styling for normal navbar-item (Desktop) 
             .navbar-item.is-selected {
                 background-color: transparent;
                 color: #3273dc;
@@ -28,19 +28,45 @@
                 border-bottom: 2px solid #3273dc;
             }
 
-            /* styling for the dropdown-items in navbar */
+            /* styling for the dropdown-items in navbar 
             .navbar-dropdown .navbar-item.is-selected {
                 background-color: #3273dc;
                 color: white;
             }
 
-            /* styling for burger-menu (Mobile) */
+            /* styling for burger-menu (Mobile) 
             @media screen and (max-width: 1024px) {
                 .navbar-menu .navbar-item.is-selected {
-                    background-color: #3273dc; /* Blaue Hintergrundfarbe für ausgewählte Elemente */
-                    color: white; /* Weiße Schrift auf blauem Hintergrund */
-                    border-bottom: none; /* Entfernt die Unterstreichung */
+                    background-color: #3273dc; /* Blaue Hintergrundfarbe für ausgewählte Elemente 
+                    color: white; /* Weiße Schrift auf blauem Hintergrund 
+                    border-bottom: none; /* Entfernt die Unterstreichung 
                 }
+            }
+            */
+
+            /* blur */
+            .card {
+                transition: transform 0.3s;
+            }
+            .card-hover-contend {
+                transition: transform 0.3s;
+            }
+            .card:hover {
+                transform: scale(1.05);
+            }
+            .card:hover .card-hover-contend {
+                filter: blur(5px);
+            }
+            .hover-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+            .card:hover .hover-text {
+                opacity: 1;
             }
         </style>
     </head>
@@ -48,11 +74,13 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="index.html">
-                    <img src="/img/logo-no-background.png" class="invert"/>
+                    <img src="/img/logo-no-background.png" class="invert" />
                 </a>
 
+                <!--
                 <a class="navbar-item is-selected"> Home </a>
                 <a class="navbar-item"> Browse </a>
+                -->
 
                 <!--
                 <a
@@ -128,7 +156,7 @@
             <div class="container">
                 <div class="box">
                     <div class="columns is-vcentered">
-                        <!-- Left side with text and button 
+                        Left side with text and button 
                         <div class="column is-two-third">
                             <header class="title is-2">Download Little Farming Game on the Play Store!</header>
                             <div class="has has-text-centered">
@@ -137,7 +165,7 @@
                                 </a>
                             </div>
                         </div>
-                        <!-- Right side with image 
+                        Right side with image 
                         <div class="column is-one-third has-text-centered">
                             <figure class="image">
                                 <img src="img/little-faming-game2.jpg" alt="Little Farming Game">
@@ -148,130 +176,43 @@
             </div>
         </section>
         -->
-        
 
         <section class="section">
             <div class="container">
                 <div class="box" style="border-radius: 15px; padding: 20px">
-                    <div class="title is-2">Games for Windows</div>
+                    <!--<div class="title is-2">Games for Windows</div>-->
                     <div class="columns is-multiline">
-                        <a class="column is-3">
+                        <div class="column is-3">
                             <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/war-of-memes.png"
-                                            alt="War Of Memes"
-                                        />
-                                    </figure>
+                                <div class="card-hover-contend">
+                                    <div class="card-image">
+                                        <figure class="image is-4by3">
+                                            <img
+                                                src="/img/war-of-memes.png"
+                                                alt="War Of Memes"
+                                            />
+                                        </figure>
+                                    </div>
+                                    <div class="card-content">
+                                        <p class="title is-5">WarOfMemes</p>
+                                        <p class="subtitle is-6">
+                                            Local Muliplayer
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="card-content">
-                                    <p class="title is-5">WarOfMemes</p>
-                                    <p class="subtitle is-6">
-                                        Local Muliplayer
-                                    </p>
+                                <div class="hover-text">
+                                    <button
+                                        class="button is-primary is-medium"
+                                        onclick="launchGame('games/escapethespike/EscapeTheSpike!.exe')"
+                                    >
+                                        Play Game
+                                    </button>
                                 </div>
                             </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/just-click.png"
-                                            alt="Just Click"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">JustClick</p>
-                                    <p class="subtitle is-6">Clicker game</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/little-farming-game.png"
-                                            alt="Little Farming Game"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">
-                                        Little-Farming-Game
-                                    </p>
-                                    <p class="subtitle is-6">Tycoon</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/easteregg-hunt.png"
-                                            alt="Easteregg Hunt"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">Easteregg-Hunt</p>
-                                    <p class="subtitle is-6">Easter Game</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/troll_adventure.png"
-                                            alt="Troll Adventure"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">Troll Adventure</p>
-                                    <p class="subtitle is-6">Adventure</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/destroy-simulator.png"
-                                            alt="Destroy Simulator"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">Destroy-Simulator</p>
-                                    <p class="subtitle is-6">Simulation</p>
-                                </div>
-                            </div>
-                        </a>
-                        <a class="column is-3">
-                            <div class="card">
-                                <div class="card-image">
-                                    <figure class="image">
-                                        <img
-                                            src="/img/escapethespike.png"
-                                            alt="Escape The Spike!"
-                                        />
-                                    </figure>
-                                </div>
-                                <div class="card-content">
-                                    <p class="title is-5">Escape The Spike!</p>
-                                    <p class="subtitle is-6">Adventure</p>
-                                </div>
-                            </div>
-                        </a>
+                        </div>
                     </div>
+                </div>
+                <!--
                     <div class="has-text-centered">
                         <a
                             class="button is-primary is-medium"
@@ -279,11 +220,9 @@
                             >All Games</a
                         >
                     </div>
-                </div>
+                -->
             </div>
         </section>
-
-        <button onclick="launchGame('path/to/game1.exe')">Play Game 1</button>
 
         <!--
         <footer class="footer">
