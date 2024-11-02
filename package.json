@@ -29,8 +29,8 @@
       "target": "nsis"
     },
     "nsis": {
-      "installerIcon": "img/app-icon.ico", 
-      "uninstallerIcon": "img/app-icon.ico", 
+      "installerIcon": "img/app-icon-invert.ico", 
+      "uninstallerIcon": "img/app-icon-invert.ico", 
       "uninstallDisplayName": "HACKERGAMES Launcher",
       "oneClick": false,
       "allowToChangeInstallationDirectory": false
