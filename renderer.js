@@ -30,10 +30,11 @@ function downloadAndInstallGame(gameName, downloadUrl) {
             // Entpacke das ZIP-Archiv
             extract(zipPath, { dir: gamePath })
                 .then(() => {
-                    console.log(`${gameName} erfolgreich installiert.`);
+                    console.log(`${gameName} sucessfully installed.`);
+                    window.alert(`${gameName} sucessfully installed.`)
                     fs.unlinkSync(zipPath); // Entferne das ZIP nach dem Entpacken
                 })
-                .catch((err) => console.error(`Fehler beim Entpacken: ${err}`));
+                .catch((err) => console.error(`Error during unpacking: ${err}`));
         });
     });
 }
@@ -44,7 +45,7 @@ function launchGame(gameName, downloadUrl) {
 
     // Prüfen, ob das Spiel installiert ist
     if (!fs.existsSync(gameExePath)) {
-        const download = window.confirm(`${gameName} ist nicht installiert. Möchten Sie es herunterladen?`);
+        const download = window.confirm(`${gameName} is not installed. Would you like to download it?`);
         if (download) {
             downloadAndInstallGame(gameName, downloadUrl);
         }
@@ -52,10 +53,10 @@ function launchGame(gameName, downloadUrl) {
         // Starte das Spiel
         exec(`"${gameExePath}"`, (error, stdout, stderr) => {
             if (error) {
-                console.error(`Fehler beim Starten des Spiels: ${stderr || error}`);
+                console.error(`Error starting the game: ${stderr || error}`);
                 return;
             }
-            console.log(`${gameName} erfolgreich gestartet.`);
+            console.log(`${gameName} started successfully.`);
         });
     }
 }
