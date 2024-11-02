@@ -7,7 +7,8 @@ function createWindow() {
         height: 825,
         minWidth: 800,
         minHeight: 600,
-        autoHideMenuBar: true, 
+        autoHideMenuBar: true,
+        icon: path.join(__dirname, 'img', 'app-icon-invert.ico'),
         webPreferences: {
             nodeIntegration: true,
             contextIsolation: false,
