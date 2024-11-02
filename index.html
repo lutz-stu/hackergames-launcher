@@ -44,6 +44,16 @@
             }
             */
 
+            /* Versteckt die vertikale und horizontale Scrollleiste */
+            body {
+                overflow: hidden; /* Versteckt die Haupt-Scrollleiste */
+            }
+
+            /* Entfernt die Scrollleiste in Chromium-basierten Browsern */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
             /* blur */
             .card {
                 transition: transform 0.3s;
