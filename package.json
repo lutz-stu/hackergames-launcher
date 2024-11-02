@@ -12,11 +12,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    
+    "unzipper": "^0.12.3"
   },
   "devDependencies": {
-    "electron-builder": "^25.1.8",
-    "electron": "^33.0.2"
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8"
   },
   "build": {
     "appId": "com.hackergames.hackergameslauncher",
@@ -34,5 +34,5 @@
       "preload.js",
       "img/*"
     ]
-    }
+  }
 }
