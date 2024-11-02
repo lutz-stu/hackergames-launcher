@@ -1,7 +1,7 @@
 {
   "name": "hackergames-launcher",
-  "version": "0.2.0",
-  "description": "HACKERGAMES Launcher to start games created by Minihacker3000",
+  "version": "1.0.0",
+  "description": "HACKERGAMES Launcher to install and start games created by Minihacker3000",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
