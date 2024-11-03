@@ -12,9 +12,10 @@ A Launcher to install and start the games created by Minihacker3000.
 - [x] Option to update games
 - [x] Option to delete games
 - [ ] Add more games that currently don't have a build for Windows.
-- [x] Add LittlefarmingGame
-- [x] See current version.
-- [x] Objekt-Schwebe-Game -> Cube Smash
-- [x] progress bar when installing game
-- [x] mouse pointer always default pointer
-- [ ] Error message when GameUrl not found
+- [x] Add Little-Farming-Game.
+- [ ] Add bug-free-version of Little-Farming-Game.
+- [x] Add option to see current version.
+- [x] renae "Objekt-Schwebe-Game" to "Cube Smash"
+- [x] Add progress bar when installing a game.
+- [x] Set mouse pointer to be always a default pointer.
+- [ ] Add error message when GameUrl not found.
