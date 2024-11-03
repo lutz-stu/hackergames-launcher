@@ -7,6 +7,49 @@ const { exec } = require('child_process');
 
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
+function showLoadingWindow() {
+    // Neues Fenster öffnen
+    const loadingWindow = window.open("", "loadingWindow", "width=300,height=200");
+
+    // Setze den Inhalt des Fensters
+    loadingWindow.document.write(`
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+                background-color: #333;
+                color: white;
+                margin: 0;
+                height: 100vh;
+            }
+            .loader {
+                border: 8px solid #f3f3f3;
+                border-top: 8px solid #3498db;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            p {
+                margin-top: 10px;
+            }
+        </style>
+        <div>
+            <div class="loader"></div>
+            <p>Downloading and installing...</p>
+        </div>
+    `);
+
+    // Rückgabe des Fensters, damit es später geschlossen werden kann
+    return loadingWindow;
+}
+
 // Funktion zum Überprüfen der Version und zum Updaten des Spiels
 function checkForUpdate(gameName, downloadUrl, callback) {
     const localVersionFile = path.join(gameDir, gameName, 'version.txt');
@@ -33,6 +76,8 @@ function checkForUpdate(gameName, downloadUrl, callback) {
 
 // Funktion zum Herunterladen, Installieren und erstmaligen Setzen der Version
 function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
+    const loadingWindow = showLoadingWindow(); // Ladefenster anzeigen
+
     const zipPath = path.join(gameDir, `${gameName}.zip`);
     const gamePath = path.join(gameDir, gameName);
 
@@ -45,10 +90,15 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
                 .then(() => {
                     fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Speichert die Version
                     fs.unlinkSync(zipPath);
+                    // Ladefenster schließen, wenn der Download und die Installation abgeschlossen sind
+                    loadingWindow.close();
                     window.alert(`${gameName} has been successfully installed.`);
                     callback();
                 })
-                .catch((err) => console.error(`Error during unpacking: ${err}`));
+                .catch((err) => {
+                    console.error(`Error during unpacking: ${err}`);
+                    loadingWindow.close(); // Ladefenster bei Fehler schließen
+                });
         });
     });
 }

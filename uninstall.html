@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HACKERGAMES Launcher</title>
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+
+        <!-- Bulma Framework -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        />
+
+        <style>
+            /* If site is in dark mode invert */
+            @media (prefers-color-scheme: dark) {
+                .invert {
+                    filter: invert(1);
+                }
+            }
+
+            /* styling for normal navbar-item (Desktop) */
+            .navbar-item.is-selected {
+                background-color: transparent;
+                color: #3273dc;
+                font-weight: bold;
+                border-bottom: 2px solid #3273dc;
+            }
+
+            /* styling for the dropdown-items in navbar 
+            .navbar-dropdown .navbar-item.is-selected {
+                background-color: #3273dc;
+                color: white;
+            }
+
+            /* styling for burger-menu (Mobile) 
+            @media screen and (max-width: 1024px) {
+                .navbar-menu .navbar-item.is-selected {
+                    background-color: #3273dc; /* Blaue Hintergrundfarbe für ausgewählte Elemente 
+                    color: white; /* Weiße Schrift auf blauem Hintergrund 
+                    border-bottom: none; /* Entfernt die Unterstreichung 
+                }
+            }
+            */
+
+            /* Versteckt die vertikale und horizontale Scrollleiste */
+            body {
+                overflow: hidden; /* Versteckt die Haupt-Scrollleiste */
+            }
+
+            /* Entfernt die Scrollleiste in Chromium-basierten Browsern */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* blur */
+            .card {
+                transition: transform 0.3s;
+            }
+            .card-hover-contend {
+                transition: transform 0.3s;
+            }
+            .card:hover {
+                transform: scale(1.05);
+            }
+            .card:hover .card-hover-contend {
+                filter: blur(5px);
+            }
+            .hover-text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+            .card:hover .hover-text {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <div class="navbar-item" href="index.html">
+                    <img src="./img/logo-no-background.png" class="invert" />
+                </div>
+
+                <!--
+                <a class="navbar-item is-selected"> Home </a>
+                <a class="navbar-item"> Browse </a>
+                -->
+
+                <!--
+                <a
+                    role="button"
+                    class="navbar-burger"
+                    aria-label="menu"
+                    aria-expanded="false"
+                    data-target="navbarMenu"
+                >
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a> -->
+            </div>
+
+            <!--
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item is-selected"> Home </a>
+
+                    <a class="navbar-item"> Browse </a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link"> More </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item"> About Us </a>
+                            <a class="navbar-item"> Contact </a>
+                            <hr class="navbar-divider" />
+                            <a
+                                class="navbar-item"
+                                href="https://github.com/lutz-stu/minizombay-software/issues"
+                                target="”_blank”"
+                            >
+                                <img
+                                    src="/img/external-link.svg"
+                                    class="invert"
+                                />
+                                &nbsp;Report an issue on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <!--
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a
+                            class="button is-link"
+                            href="https://minihacker3000.itch.io"
+                            target="”_blank”"
+                        >
+                            <span
+                                ><img
+                                    src="/img/external-link.svg"
+                                    class="invert"
+                                />
+                                &nbsp;Report an issue on GitHub</span
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+            -->
+        </nav>
+
+        <section class="section">
+            <a href="index.html">< Back</a>
+        </section>
+
+        <section class="section">
+            <button>Uninstall abc</button>
+        </section>
+
+        <script src="renderer.js"></script>
+    </body>
+</html>
