@@ -50,6 +50,30 @@ function showLoadingWindow() {
     return loadingWindow;
 }
 
+const gameNames = [
+    'CubeSmash',
+    'SpaceCollector',
+    'JustKlick',
+    'Easteregg-Hunt',
+    'EscapeTheSpike'
+];
+
+function loadGameVersions() {
+    gameNames.forEach((gameName) => {
+        const versionFilePath = path.join(gameDir, gameName, 'version.txt');
+        const versionElement = document.querySelector(`#version-subtitle-${gameName}`);
+
+        if (versionElement) { // Prüft, ob das Element existiert
+            if (fs.existsSync(versionFilePath)) {
+                const version = fs.readFileSync(versionFilePath, 'utf-8').trim();
+                versionElement.textContent = `v${version}`;
+            } else {
+                versionElement.textContent = 'Nicht installiert';
+            }
+        }
+    });
+}
+
 // Funktion zum Überprüfen der Version und zum Updaten des Spiels
 function checkForUpdate(gameName, downloadUrl, callback) {
     const localVersionFile = path.join(gameDir, gameName, 'version.txt');
@@ -93,6 +117,7 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
                     // Ladefenster schließen, wenn der Download und die Installation abgeschlossen sind
                     loadingWindow.close();
                     window.alert(`${gameName} has been successfully installed.`);
+                    loadGameVersions()
                     callback();
                 })
                 .catch((err) => {
@@ -150,3 +175,7 @@ function uninstallGame(gameName) {
 }
 
 console.log("Launcher started");
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    loadGameVersions();
+});
