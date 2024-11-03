@@ -9,12 +9,10 @@ A Launcher to install and start the games created by Minihacker3000.
 - launch games if they are installed
 
 # To-do
-- [ ] Option to update games
+- [x] Option to update games
 - [ ] Option to delete games
 - [ ] Add more games that currently don't have a build for Windows.
 - [ ] See current version.
 - [x] Objekt-Schwebe-Game -> Cube Smash
-- [x] fix first install update bug
 - [ ] progress bar when installing game
-- [x] fix always starts when asking to update bug
 - [ ] mouse pointer always default pointer
