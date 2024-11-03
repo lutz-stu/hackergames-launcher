@@ -131,4 +131,22 @@ function launchGame(gameName, downloadUrl) {
     }
 }
 
+// Funktion zum Deinstallieren eines Spiels
+function uninstallGame(gameName) {
+    const gamePath = path.join(gameDir, gameName);
+    
+    if (fs.existsSync(gamePath)) {
+        fs.rm(gamePath, { recursive: true, force: true }, (err) => {
+            if (err) {
+                console.error(`Error while uninstalling ${gameName}: ${err}`);
+                window.alert(`Error while uninstalling ${gameName}: ${err}`);
+            } else {
+                window.alert(`${gameName} was uninstalled successfully.`);
+            }
+        });
+    } else {
+        window.alert(`${gameName} is not installed.`);
+    }
+}
+
 console.log("Launcher started");
