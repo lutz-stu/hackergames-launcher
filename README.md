@@ -26,3 +26,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] (Bug) Open GitHub in new tab/browser
 - [ ] Change to mouse pointer when hovering over link to GitHub
 - [ ] Set titlebar to always dark
+- [ ] Put CSS in extern CSS
