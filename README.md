@@ -15,4 +15,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] See current version.
 - [x] Objekt-Schwebe-Game -> Cube Smash
 - [x] progress bar when installing game
-- [ ] mouse pointer always default pointer
+- [x] mouse pointer always default pointer
