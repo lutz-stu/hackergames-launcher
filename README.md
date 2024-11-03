@@ -17,8 +17,9 @@ A Launcher to install and start the games created by Minihacker3000.
 - [x] Add option to see current version.
 - [x] renae "Objekt-Schwebe-Game" to "Cube Smash"
 - [x] Add progress bar when installing a game.
-- [x] Set mouse pointer to be always a default pointer.
+- [x] Set mouse pointer to be always default.
 - [ ] Add error message when GameUrl not found.
 - [ ] Add signing (is it free?).
 - [ ] Make it clear that you can scroll.
 - [ ] (Bug) Open GitHub in new tab/browser.
+- [ ] Change to mouse pointer when hovering over link to GitHub.
