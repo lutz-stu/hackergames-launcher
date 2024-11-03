@@ -1,38 +1,45 @@
-const { exec } = require('child_process');
 const fs = require('fs');
+const https = require('https');
+const extract = require('extract-zip');
 const path = require('path');
 const os = require('os');
-const https = require('https'); // Zum Herunterladen von Dateien
-const extract = require('extract-zip'); // Zum Entpacken von ZIP-Dateien (Installieren mit 'npm install extract-zip')
+const { exec } = require('child_process');
 
-// Speicherort im AppData-Verzeichnis des Benutzers
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
-// Überprüfe, ob der Spieleordner existiert, und erstelle ihn, falls nicht
-if (!fs.existsSync(gameDir)) {
-    fs.mkdirSync(gameDir, { recursive: true });
+// Funktion zum Überprüfen der Version und zum Updaten des Spiels
+function checkForUpdate(gameName, downloadUrl) {
+    const localVersionFile = path.join(gameDir, gameName, 'version.txt');
+    const onlineVersionUrl = `${downloadUrl.replace(/\.zip$/, '')}/version.txt`;
+
+    https.get(onlineVersionUrl, (response) => {
+        let onlineVersion = '';
+        response.on('data', (chunk) => onlineVersion += chunk);
+        response.on('end', () => {
+            const localVersion = fs.existsSync(localVersionFile) ? fs.readFileSync(localVersionFile, 'utf-8') : '0.0.0';
+            if (onlineVersion.trim() !== localVersion.trim()) {
+                const update = window.confirm(`A new version of ${gameName} is available. Update now?`);
+                if (update) downloadAndInstallGame(gameName, downloadUrl, onlineVersion.trim());
+            }
+        });
+    });
 }
 
-// Funktion zum Herunterladen und Installieren des Spiels
-function downloadAndInstallGame(gameName, downloadUrl) {
+// Funktion zum Herunterladen, Installieren und Aktualisieren der lokalen Version
+function downloadAndInstallGame(gameName, downloadUrl, version = '1.0.0') {
     const zipPath = path.join(gameDir, `${gameName}.zip`);
     const gamePath = path.join(gameDir, gameName);
 
-    console.log(downloadUrl)
-
-    // Lade das ZIP-Archiv herunter
     const file = fs.createWriteStream(zipPath);
     https.get(downloadUrl, (response) => {
         response.pipe(file);
         file.on('finish', () => {
             file.close();
-
-            // Entpacke das ZIP-Archiv
             extract(zipPath, { dir: gamePath })
                 .then(() => {
-                    console.log(`${gameName} sucessfully installed.`);
-                    window.alert(`${gameName} sucessfully installed.`)
-                    fs.unlinkSync(zipPath); // Entferne das ZIP nach dem Entpacken
+                    fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Speichert die Version
+                    fs.unlinkSync(zipPath);
+                    window.alert(`${gameName} has been successfully updated.`);
                 })
                 .catch((err) => console.error(`Error during unpacking: ${err}`));
         });
@@ -42,21 +49,13 @@ function downloadAndInstallGame(gameName, downloadUrl) {
 // Funktion zum Starten des Spiels
 function launchGame(gameName, downloadUrl) {
     const gameExePath = path.join(gameDir, gameName, `${gameName}.exe`);
-
-    // Prüfen, ob das Spiel installiert ist
     if (!fs.existsSync(gameExePath)) {
         const download = window.confirm(`${gameName} is not installed. Would you like to download it?`);
-        if (download) {
-            downloadAndInstallGame(gameName, downloadUrl);
-        }
+        if (download) downloadAndInstallGame(gameName, downloadUrl);
     } else {
-        // Starte das Spiel
-        exec(`"${gameExePath}"`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error starting the game: ${stderr || error}`);
-                return;
-            }
-            console.log(`${gameName} started successfully.`);
+        checkForUpdate(gameName, downloadUrl); // Prüft auf Updates, bevor das Spiel gestartet wird
+        exec(`"${gameExePath}"`, (error) => {
+            if (error) console.error(`Error starting the game: ${error}`);
         });
     }
 }
