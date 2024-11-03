@@ -12,3 +12,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Option to update games
 - [ ] Add more games that currently don't have a build for Windows.
 - [ ] See current version.
+- [ ] Objekt-Schwebe-Game -> Cube Smash
