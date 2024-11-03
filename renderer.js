@@ -9,7 +9,7 @@ const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher
 
 function showLoadingWindow() {
     // Neues Fenster öffnen
-    const loadingWindow = window.open("", "loadingWindow", "width=300,height=200");
+    const loadingWindow = window.open("", "loadingWindow", "width=300,height=200,autoHideMenuBar=true");
 
     // Setze den Inhalt des Fensters
     loadingWindow.document.write(`
