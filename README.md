@@ -2,7 +2,7 @@
 
 A Launcher to install and start the games created by Minihacker3000.
 
-![Screenshot 2024-11-03 203415](https://github.com/user-attachments/assets/378dd243-d4e7-40ca-a37f-50b4324a531d)
+![Screenshot 2024-11-03 205042](https://github.com/user-attachments/assets/1b7ae837-3490-4de4-9454-0394a1427e1a)
 
 ## Features
 - Dowload games if they aren't installed
