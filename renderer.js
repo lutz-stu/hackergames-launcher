@@ -54,6 +54,7 @@ const gameNames = [
     'CubeSmash',
     'SpaceCollector',
     'JustKlick',
+    'Little-Farming-Game',
     'Easteregg-Hunt',
     'EscapeTheSpike'
 ];
@@ -114,10 +115,10 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
                 .then(() => {
                     fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Speichert die Version
                     fs.unlinkSync(zipPath);
+                    loadGameVersions()
                     // Ladefenster schließen, wenn der Download und die Installation abgeschlossen sind
                     loadingWindow.close();
                     window.alert(`${gameName} has been successfully installed.`);
-                    loadGameVersions()
                     callback();
                 })
                 .catch((err) => {
