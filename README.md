@@ -19,3 +19,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [x] Add progress bar when installing a game.
 - [x] Set mouse pointer to be always a default pointer.
 - [ ] Add error message when GameUrl not found.
+- [ ] Add signing (is it free?).
