@@ -5,10 +5,13 @@ A Launcher to install and start the games created by Minihacker3000.
 ![HACKGAMES-Screenshot-nobg2](https://github.com/user-attachments/assets/04016300-3a33-4249-b5b9-212f4f448604)
 
 ## Features
-- dowload games if they aren't installed
-- launch games if they are installed
+- Dowload games if they aren't installed
+- Launch games if they are installed
+- Automatically update the games if there is a new version available online
+- Uninstall games
+- See currently installed version
 
-# To-do
+## To-do
 - [x] Option to update games
 - [x] Option to delete games
 - [ ] Add more games that currently don't have a build for Windows
