@@ -20,3 +20,5 @@ A Launcher to install and start the games created by Minihacker3000.
 - [x] Set mouse pointer to be always a default pointer.
 - [ ] Add error message when GameUrl not found.
 - [ ] Add signing (is it free?).
+- [ ] Make it clear that you can scroll.
+- [ ] (Bug) Open GitHub in new tab/browser.
