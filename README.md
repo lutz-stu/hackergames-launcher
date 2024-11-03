@@ -22,3 +22,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Set titlebar to always dark
 - [ ] Put CSS in extern CSS
 - [ ] Change minwith/minheight
+- [ ] Add auto Launcher Update
