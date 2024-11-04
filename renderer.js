@@ -7,18 +7,18 @@ const { exec } = require('child_process');
 
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
-// Funktion, um sicherzustellen, dass das Verzeichnis existiert
+// Function to ensure the directory exists
 function ensureGameDirExists() {
     if (!fs.existsSync(gameDir)) {
-        fs.mkdirSync(gameDir, { recursive: true }); // Erstellt den gesamten Pfad, falls er nicht existiert
+        fs.mkdirSync(gameDir, { recursive: true }); // Creates the entire path if it doesn't exist
     }
 }
 
 function showLoadingWindow() {
-    // Neues Fenster öffnen
+    // Open a new window
     const loadingWindow = window.open("", "loadingWindow", "width=300,height=200,autoHideMenuBar=true");
 
-    // Setze den Inhalt des Fensters
+    // Set the content of the window
     loadingWindow.document.write(`
         <style>
             body {
@@ -53,7 +53,7 @@ function showLoadingWindow() {
         </div>
     `);
 
-    // Rückgabe des Fensters, damit es später geschlossen werden kann
+    // Return the window so it can be closed later
     return loadingWindow;
 }
 
@@ -66,23 +66,24 @@ const gameNames = [
     'EscapeTheSpike'
 ];
 
+// Function to load the game versions
 function loadGameVersions() {
     gameNames.forEach((gameName) => {
         const versionFilePath = path.join(gameDir, gameName, 'version.txt');
         const versionElement = document.querySelector(`#version-subtitle-${gameName}`);
 
-        if (versionElement) { // Prüft, ob das Element existiert
+        if (versionElement) { // Check if the element exists
             if (fs.existsSync(versionFilePath)) {
                 const version = fs.readFileSync(versionFilePath, 'utf-8').trim();
                 versionElement.textContent = `v${version}`;
             } else {
-                versionElement.textContent = 'Nicht installiert';
+                versionElement.textContent = 'Not installed';
             }
         }
     });
 }
 
-// Funktion zum Überprüfen der Version und zum Updaten des Spiels
+// Function to check the version and update the game
 function checkForUpdate(gameName, downloadUrl, callback) {
     const localVersionFile = path.join(gameDir, gameName, 'version.txt');
     const onlineVersionUrl = `${downloadUrl.replace(/\.zip$/, '')}/version.txt`;
@@ -106,10 +107,10 @@ function checkForUpdate(gameName, downloadUrl, callback) {
     });
 }
 
-// Funktion zum Herunterladen, Installieren und erstmaligen Setzen der Version
+// Function to download, install, and initially set the version
 function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
-    const loadingWindow = showLoadingWindow(); // Ladefenster anzeigen
-    ensureGameDirExists(); // Sicherstellen, dass das Verzeichnis existiert
+    const loadingWindow = showLoadingWindow(); // Show loading window
+    ensureGameDirExists(); // Ensure the directory exists
 
     const zipPath = path.join(gameDir, `${gameName}.zip`);
     const gamePath = path.join(gameDir, gameName);
@@ -121,23 +122,23 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
             file.close();
             extract(zipPath, { dir: gamePath })
                 .then(() => {
-                    fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Speichert die Version
+                    fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Save the version
                     fs.unlinkSync(zipPath);
-                    loadGameVersions()
-                    // Ladefenster schließen, wenn der Download und die Installation abgeschlossen sind
+                    loadGameVersions();
+                    // Close the loading window when the download and installation are complete
                     loadingWindow.close();
                     window.alert(`${gameName} has been successfully installed.`);
                     callback();
                 })
                 .catch((err) => {
                     console.error(`Error during unpacking: ${err}`);
-                    loadingWindow.close(); // Ladefenster bei Fehler schließen
+                    loadingWindow.close(); // Close the loading window on error
                 });
         });
     });
 }
 
-// Funktion zum Starten des Spiels
+// Function to launch the game
 function launchGame(gameName, downloadUrl) {
     const gameExePath = path.join(gameDir, gameName, `${gameName}.exe`);
     if (!fs.existsSync(gameExePath)) {
@@ -149,9 +150,7 @@ function launchGame(gameName, downloadUrl) {
                 const download = window.confirm(`${gameName} is not installed. Would you like to download it?`);
                 if (download) {
                     downloadAndInstallGame(gameName, downloadUrl, onlineVersion.trim(), () => {
-                        exec(`"${gameExePath}"`, (error) => {
-                            if (error) console.error(`Error starting the game: ${error}`);
-                        });
+                        // Game will not auto-launch after installation
                     });
                 }
             });
@@ -165,7 +164,7 @@ function launchGame(gameName, downloadUrl) {
     }
 }
 
-// Funktion zum Deinstallieren eines Spiels
+// Function to uninstall a game
 function uninstallGame(gameName) {
     const gamePath = path.join(gameDir, gameName);
     
