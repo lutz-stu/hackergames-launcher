@@ -23,3 +23,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Put CSS in extern CSS
 - [ ] Change minwith/minheight
 - [ ] Add auto Launcher Update
+- [ ] Make download appear on Google Search.
