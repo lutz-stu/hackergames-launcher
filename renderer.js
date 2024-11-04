@@ -7,6 +7,13 @@ const { exec } = require('child_process');
 
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
+// Funktion, um sicherzustellen, dass das Verzeichnis existiert
+function ensureGameDirExists() {
+    if (!fs.existsSync(gameDir)) {
+        fs.mkdirSync(gameDir, { recursive: true }); // Erstellt den gesamten Pfad, falls er nicht existiert
+    }
+}
+
 function showLoadingWindow() {
     // Neues Fenster öffnen
     const loadingWindow = window.open("", "loadingWindow", "width=300,height=200,autoHideMenuBar=true");
@@ -102,6 +109,7 @@ function checkForUpdate(gameName, downloadUrl, callback) {
 // Funktion zum Herunterladen, Installieren und erstmaligen Setzen der Version
 function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
     const loadingWindow = showLoadingWindow(); // Ladefenster anzeigen
+    ensureGameDirExists(); // Sicherstellen, dass das Verzeichnis existiert
 
     const zipPath = path.join(gameDir, `${gameName}.zip`);
     const gamePath = path.join(gameDir, gameName);
