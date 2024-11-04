@@ -4,6 +4,7 @@ const extract = require('extract-zip');
 const path = require('path');
 const os = require('os');
 const { exec } = require('child_process');
+const { shell } = require('electron');
 
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
@@ -186,4 +187,13 @@ console.log("Launcher started");
 
 document.addEventListener('DOMContentLoaded', (event) => {
     loadGameVersions();
+
+    // Open GitHub Link in the default Browser
+    const githubLink = document.getElementById('github-link');
+    if (githubLink) {
+        githubLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevents the link from opening in the Electron window
+            shell.openExternal(githubLink.href); // Opens in the default browser
+        });
+    }
 });
