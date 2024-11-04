@@ -17,11 +17,12 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Add error message when GameUrl not found
 - [ ] Add signing (is it free?)
 - [ ] Make it clear that you can scroll
-- [x] (Bug) Open GitHub in new tab/browser
-- [x] Change to mouse pointer when hovering over link to GitHub
+
 - [ ] Set titlebar to always dark
 - [ ] Put CSS in extern CSS
 - [ ] Change minwith/minheight
 - [ ] Add auto Launcher Update
 - [ ] Make download appear on Google Search.
+- [x] (Bug) Open GitHub in new tab/browser
+- [x] Change to mouse pointer when hovering over link to GitHub
 - [x] Remove auto start after installing game
