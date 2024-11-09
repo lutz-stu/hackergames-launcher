@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 function createWindow() {
@@ -10,8 +10,10 @@ function createWindow() {
         autoHideMenuBar: true,
         icon: path.join(__dirname, 'img', 'app-icon-invert.ico'),
         webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
+            preload: path.join(__dirname, 'preload.js'), // Use preload for security
+            contextIsolation: false, 
+            enableRemoteModule: false, // Disables remote module for security
+            nodeIntegration: true, 
         }
     });
 
@@ -21,4 +23,9 @@ function createWindow() {
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
+});
+
+// Handle a request for the current version from the renderer process
+ipcMain.handle('get-app-version', () => {
+    return app.getVersion();
 });

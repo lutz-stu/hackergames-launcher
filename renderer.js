@@ -4,7 +4,8 @@ const extract = require('extract-zip');
 const path = require('path');
 const os = require('os');
 const { exec } = require('child_process');
-const { shell } = require('electron');
+const { ipcRenderer, shell } = require('electron');
+
 
 const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
 
@@ -183,10 +184,112 @@ function uninstallGame(gameName) {
     }
 }
 
+// URL for the hosted version file (or GitHub as fallback)
+const hostedVersionUrl = 'https://hackergames.netlify.app/launcher/version.txt';
+const githubReleaseUrl = 'https://github.com/lutz-stu/hackergames-launcher/releases/download';
+
+// Get the current launcher version from the main process
+async function getCurrentLauncherVersion() {
+    return await ipcRenderer.invoke('get-app-version'); // Requests version from main process
+}
+
+function downloadInstaller(downloadUrl, savePath, callback) {
+    const file = fs.createWriteStream(savePath);
+
+    https.get(downloadUrl, (response) => {
+        response.pipe(file);
+
+        file.on('finish', () => {
+            file.close(callback); // Call the callback once download completes
+        });
+    }).on('error', (err) => {
+        console.error(`Download error: ${err}`);
+        fs.unlink(savePath, () => {}); // Delete the file on error
+    });
+}
+
+function displayUpdateMessage(onlineVersion, currentVersion) {
+    const placeholder = document.getElementById('update-message-placeholder');
+
+    // Check if the message already exists
+    if (document.getElementById('update-message')) {
+        return; // If it exists, do nothing
+    }
+
+    // Create the message element with version details
+    const messageElement = document.createElement('section');
+    messageElement.className = 'section';
+    messageElement.id = 'update-message';
+    messageElement.innerHTML = `
+        <article class="message is-warning">
+            <div class="message-header">
+                <p>New Update available!</p>
+                <button class="delete" aria-label="delete" style="cursor: pointer !important"></button>
+            </div>
+            <div class="message-body">
+                A new version of the Launcher (v${onlineVersion}) is available. Would you like to update now?
+                <br>(Current version: v${currentVersion})
+            </div>
+        </article>
+    `;
+
+    // Append the message element to the placeholder
+    placeholder.appendChild(messageElement);
+
+    // Add click event listener to the delete button to remove the message
+    const deleteButton = messageElement.querySelector('.delete');
+    deleteButton.addEventListener('click', () => {
+        messageElement.remove();
+    });
+
+    // Add click event listener to the message body to start download and installation
+    const messageBody = messageElement.querySelector('.message-body');
+    messageBody.addEventListener('click', () => {
+        const downloadUrl = `https://hackergames.netlify.app/launcher/HACKERGAMES-Launcher-latest-windows-installer.exe`;
+        const savePath = path.join(os.tmpdir(), 'HACKERGAMES-Launcher-latest-windows-installer.exe');
+
+        downloadInstaller(downloadUrl, savePath, () => {
+            // Execute the installer once download completes
+            exec(`"${savePath}"`, (error) => {
+                if (error) {
+                    console.error(`Error launching installer: ${error}`);
+                } else {
+                    app.quit(); // Exit the current app instance after starting installer
+                }
+            });
+        });
+    });
+}
+
+async function checkForLauncherUpdate() {
+    https.get(hostedVersionUrl, (response) => {
+        let onlineVersion = '';
+        response.on('data', (chunk) => (onlineVersion += chunk));
+        response.on('end', async () => { // Make the callback async
+            onlineVersion = onlineVersion.trim();
+
+            // Retrieve the current version and await the result
+            const currentVersion = await getCurrentLauncherVersion();
+
+            console.log(currentVersion);
+            console.log(onlineVersion);
+
+            if (onlineVersion && onlineVersion !== currentVersion) {
+                displayUpdateMessage(onlineVersion, currentVersion); // Show update message with versions
+            }
+        });
+    }).on('error', (err) => {
+        console.error(`Error checking for updates: ${err}`);
+    });
+}
+
+
+
 console.log("Launcher started");
 
 document.addEventListener('DOMContentLoaded', (event) => {
     loadGameVersions();
+    checkForLauncherUpdate(); // Check for a new launcher version
 
     // Open GitHub Link in the default Browser
     const githubLink = document.getElementById('github-link');
