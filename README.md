@@ -17,7 +17,7 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Add error message when GameUrl not found
 - [ ] Add signing (is it free?)
 - [ ] Make it clear that you can scroll
-
+- [ ] Add setting menu
 - [ ] Set titlebar to always dark
 - [ ] Put CSS in extern CSS
 - [ ] Change minwith/minheight
