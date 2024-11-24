@@ -22,6 +22,7 @@ A Launcher to install and start the games created by Minihacker3000.
 - [ ] Put CSS in extern CSS
 - [ ] Change minwith/minheight
 - [ ] Add auto Launcher Update
+- [ ] Settings: Show games that are still under development
 - [ ] Make download appear on Google Search.
 - [x] (Bug) Open GitHub in new tab/browser
 - [x] Change to mouse pointer when hovering over link to GitHub
