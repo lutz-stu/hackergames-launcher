@@ -4,6 +4,8 @@ A Launcher to install and start the games created by Minihacker3000.
 
 ![Screenshot 2024-11-03 205042](https://github.com/user-attachments/assets/1b7ae837-3490-4de4-9454-0394a1427e1a)
 
+[HACKERGAMES Launcher on itch.io](https://lutz-stu.itch.io/hackergames-launcher)
+
 ## Features
 - Dowload games if they aren't installed
 - Launch games if they are installed
@@ -30,3 +32,4 @@ A Launcher to install and start the games created by Minihacker3000.
 - [x] (Bug) Open GitHub in new tab/browser
 - [x] Change to mouse pointer when hovering over link to GitHub
 - [x] Remove auto start after installing game
+
