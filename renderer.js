@@ -248,6 +248,7 @@ function displayUpdateMessage(onlineVersion, currentVersion) {
         const downloadUrl = `https://hackergames.netlify.app/launcher/HACKERGAMES-Launcher-latest-windows-installer.exe`;
         const savePath = path.join(os.tmpdir(), 'HACKERGAMES-Launcher-latest-windows-installer.exe');
 
+        const loadingWindow = showLoadingWindow(); // Show loading window
         downloadInstaller(downloadUrl, savePath, () => {
             // Execute the installer once download completes
             exec(`"${savePath}"`, (error) => {
