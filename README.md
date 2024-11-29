@@ -11,6 +11,9 @@ A Launcher to install and start the games created by Minihacker3000.
 - Uninstall games
 - See currently installed version
 
+## Used npm packages
+- todo
+
 ## To-do
 - [ ] Add more games that currently don't have a build for Windows
 - [ ] Bulma Progress bar when installing games ?
