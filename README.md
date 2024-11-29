@@ -14,7 +14,10 @@ A Launcher to install, run and auto-update the games created by Minihacker3000.
 - See currently installed version
 
 ## Used npm packages
-- todo
+- electron-builder@25.1.8
+- electron@33.0.2
+- extract-zip@2.0.1
+- unzipper@0.12.3
 
 ## To-do
 - [ ] Add more games that currently don't have a build for Windows
