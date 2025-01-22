@@ -82,6 +82,27 @@
             .card:hover .hover-text {
                 opacity: 1;
             }
+
+            /* Settings Icon */
+            .settings-icon {
+                border-radius: 8px; /* Rounded corners */
+                transition: background-color 0.3s;
+                padding: 10%; /* Adjust padding to control the size of the icon */
+                position: relative;
+                overflow: hidden;
+            }
+            .settings-icon img {
+                width: 70%;
+                height: 70%;
+            }
+            .settings-icon:hover {
+                background-color: rgba(
+                    240,
+                    240,
+                    240,
+                    0.3
+                ); /* Transparent background */
+            }
         </style>
     </head>
     <body>
@@ -142,27 +163,16 @@
             </div>
             -->
 
-            <!--
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a
-                            class="button is-link"
-                            href="https://minihacker3000.itch.io"
-                            target="”_blank”"
-                        >
-                            <span
-                                ><img
-                                    src="/img/external-link.svg"
-                                    class="invert"
-                                />
-                                &nbsp;Report an issue on GitHub</span
-                            >
-                        </a>
+                        <!-- Settings Icon -->
+                        <button class="settings-icon">
+                            <img src="./img/settings.svg" class="invert" />
+                        </button>
                     </div>
                 </div>
             </div>
-            -->
         </nav>
 
         <!-- Placeholder for update message -->
