@@ -65,6 +65,7 @@ const gameNames = [
     'JustKlick',
     'Little-Farming-Game',
     'Easteregg-Hunt',
+    'TrollAdventure',
     'EscapeTheSpike'
 ];
 
