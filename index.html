@@ -12,98 +12,8 @@
             href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
         />
 
-        <style>
-            /* If site is in dark mode invert */
-            @media (prefers-color-scheme: dark) {
-                .invert {
-                    filter: invert(1);
-                }
-            }
-
-            /* styling for normal navbar-item (Desktop) */
-            .navbar-item.is-selected {
-                background-color: transparent;
-                color: #3273dc;
-                font-weight: bold;
-                border-bottom: 2px solid #3273dc;
-            }
-
-            /* styling for the dropdown-items in navbar 
-            .navbar-dropdown .navbar-item.is-selected {
-                background-color: #3273dc;
-                color: white;
-            }
-
-            /* styling for burger-menu (Mobile) 
-            @media screen and (max-width: 1024px) {
-                .navbar-menu .navbar-item.is-selected {
-                    background-color: #3273dc; /* Blaue Hintergrundfarbe für ausgewählte Elemente 
-                    color: white; /* Weiße Schrift auf blauem Hintergrund 
-                    border-bottom: none; /* Entfernt die Unterstreichung 
-                }
-            }
-            */
-
-            * {
-                cursor: default !important; /* Setzt den Cursor auf den normalen Zeiger für alle Elemente */
-            }
-
-            /* Versteckt die vertikale und horizontale Scrollleiste */
-            body {
-                overflow: hidden; /* Versteckt die Haupt-Scrollleiste */
-            }
-
-            /* Entfernt die Scrollleiste in Chromium-basierten Browsern */
-            body::-webkit-scrollbar {
-                display: none;
-            }
-
-            /* blur */
-            .card {
-                transition: transform 0.3s;
-            }
-            .card-hover-contend {
-                transition: transform 0.3s;
-            }
-            .card:hover {
-                transform: scale(1.05);
-            }
-            .card:hover .card-hover-contend {
-                filter: blur(5px);
-            }
-            .hover-text {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
-            .card:hover .hover-text {
-                opacity: 1;
-            }
-
-            /* Settings Icon */
-            .settings-icon {
-                border-radius: 8px; /* Rounded corners */
-                transition: background-color 0.3s;
-                padding: 10%; /* Adjust padding to control the size of the icon */
-                position: relative;
-                overflow: hidden;
-            }
-            .settings-icon img {
-                width: 70%;
-                height: 70%;
-            }
-            .settings-icon:hover {
-                background-color: rgba(
-                    240,
-                    240,
-                    240,
-                    0.3
-                ); /* Transparent background */
-            }
-        </style>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles.css"/>
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -171,7 +81,7 @@
                         </button>
                         -->
                         <button class="button is-primary">
-                            <img src="./img/settings.svg" class="invert" />
+                            <img src="./img/settings.svg"/>
                         </button>
                     </div>
                 </div>
@@ -184,7 +94,7 @@
         <section class="section">
             <div class="container">
                 <div class="box" style="border-radius: 15px; padding: 20px">
-                    <!--<div class="title is-2">Games for Windows</div>-->
+                    <!--<div class="title is-2">Games</div>-->
                     <div class="columns is-multiline">
                         <div class="column is-3">
                             <div class="card">
