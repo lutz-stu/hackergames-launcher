@@ -13,7 +13,7 @@
         />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="styles.css"/>
+        <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
         <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -74,16 +74,14 @@
             -->
             <div class="navbar-end">
                 <div class="navbar-item">
-                    <div class="buttons">
-                        <!-- ALT Settings Icon
+                    <!-- ALT Settings Icon
                         <button class="settings-icon">
                             <img src="./img/settings.svg" class="invert" />
                         </button>
                         -->
-                        <button class="button is-primary">
-                            <img src="./img/settings.svg"/>
-                        </button>
-                    </div>
+                    <button class="button is-primary" id="openSettings">
+                        <img src="./img/settings.svg" />
+                    </button>
                 </div>
             </div>
         </nav>
@@ -319,48 +317,6 @@
                     </div>
                 -->
             </div>
-        </section>
-
-        <section class="section">
-            <article class="message is-info">
-                <!--
-                <div class="message-header">
-                  <p>Info</p>
-                  <button class="delete" aria-label="delete"></button>
-                </div>
-                -->
-                <div class="message-body">
-                    To close some games you have to press ALT+F4 because they
-                    don't have a QUIT-Button yet.
-                </div>
-            </article>
-            <article class="message is-link">
-                <!--
-                <div class="message-header">
-                  <p>Link</p>
-                  <button class="delete" aria-label="delete"></button>
-                </div>
-                -->
-                <div class="message-body">
-                    This is an early version of the Launcher so if you notice
-                    any issues feel free to
-                    <a
-                        id="github-link"
-                        href="https://github.com/lutz-stu/hackergames-launcher/issues"
-                        style="cursor: pointer !important"
-                        >report them on GitHub</a
-                    >.
-                </div>
-            </article>
-        </section>
-
-        <section class="section">
-            <a
-                class="button is-danger"
-                href="uninstall.html"
-                style="cursor: pointer !important"
-                >Uninstall Games</a
-            >
         </section>
 
         <script src="renderer.js"></script>

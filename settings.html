@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Settings | HACKERGAMES Launcher</title>
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+
+        <!-- Bulma Framework -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        />
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand navbar-brand is-flex is-justify-content-space-between is-align-items-center" style="width: 100%;">
+                <div class="navbar-item">
+                    <header class="title is-3">Settings</header>
+                </div>
+
+                <div class="navbar-item">
+                    <img src="./img/x-square.svg" class="invert" id="closeSettings"/>
+                </div>
+            </div>
+        </nav>
+
+        <section class="section">
+            <a
+                class="button is-danger mb-5"
+                href="uninstall.html"
+                style="cursor: pointer !important"
+                >Uninstall Games</a
+            >
+            <article class="message is-info">
+                <div class="message-body">
+                    To close some games you have to press ALT+F4 because they
+                    don't have a QUIT-Button yet.
+                </div>
+            </article>
+            <article class="message is-link">
+                <div class="message-body">
+                    This is an early version of the Launcher so if you notice
+                    any issues feel free to
+                    <a
+                        id="github-link"
+                        href="https://github.com/lutz-stu/hackergames-launcher/issues"
+                        style="cursor: pointer !important"
+                        >report them on GitHub</a
+                    >.
+                </div>
+            </article>
+        </section>
+
+        <script src="renderer.js"></script>
+        <script>console.log("Settings window started");</script>
+    </body>
+</html>

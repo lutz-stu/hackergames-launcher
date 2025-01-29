@@ -39,6 +39,8 @@
     "files": [
       "index.html",
       "uninstall.html",
+      "settings.html",
+      "styles.css",
       "main.js",
       "renderer.js",
       "preload.js",

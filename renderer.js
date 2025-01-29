@@ -285,6 +285,11 @@ async function checkForLauncherUpdate() {
     });
 }
 
+// Event listener for the settings button
+document.getElementById('openSettings').addEventListener('click', () => {
+    ipcRenderer.send('open-settings-window');
+});
+
 
 
 console.log("Launcher started");
@@ -300,5 +305,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             e.preventDefault(); // Prevents the link from opening in the Electron window
             shell.openExternal(githubLink.href); // Opens in the default browser
         });
+    }
+
+    console.log("DOMContentLoaded triggered");
+    const closeSettingsButton = document.getElementById("closeSettings");
+    console.log("closeSettingsButton:", closeSettingsButton);
+
+    if (closeSettingsButton) {
+        closeSettingsButton.addEventListener("click", () => {
+            window.electron.send("closeSettingsWindow");
+            console.log("closeSettingsWindow");
+        });
+    } else {
+        console.log("Element #closeSettings nicht gefunden");
     }
 });
