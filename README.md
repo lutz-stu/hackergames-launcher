@@ -27,7 +27,7 @@ A Launcher to install, run and auto-update the games created by Minihacker3000.
 - [ ] Make it clear that you can scroll
 - [ ] Add setting menu
 - [ ] Set titlebar to always dark
-- [ ] Put CSS in extern CSS
+- [x] Put CSS in extern CSS
 - [ ] Change minwith/minheight
 - [ ] Settings: Show games that are still under development
 - [ ] Make download appear on Google Search.
