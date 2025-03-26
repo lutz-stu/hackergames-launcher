@@ -20,6 +20,7 @@
             <div class="navbar-brand">
                 <div class="navbar-item" href="index.html">
                     <img src="./img/logo-no-background.png" class="invert" />
+                    <header class="title is-5">Launcher</header>
                 </div>
 
                 <!--
@@ -79,8 +80,40 @@
                             <img src="./img/settings.svg" class="invert" />
                         </button>
                         -->
-                    <button class="button is-primary" id="openSettings">
-                        <img src="./img/settings.svg" />
+                    <button class="button" id="openSettings">
+                        <img src="./img/settings.svg" class="invert" />
+                        <script> // only add is-dark class if dark mode is enabled
+                            const button =
+                                document.getElementById("openSettings");
+
+                            // Überprüfen, ob das Farbschema dunkel ist
+                            if (
+                                window.matchMedia &&
+                                window.matchMedia(
+                                    "(prefers-color-scheme: dark)"
+                                ).matches
+                            ) {
+                                button.classList.add("is-dark");
+                            }
+
+                            // Optional: Überprüfen und anpassen, wenn sich das Farbschema ändert
+                            window
+                                .matchMedia("(prefers-color-scheme: dark)")
+                                .addListener((e) => {
+                                    if (e.matches) {
+                                        button.classList.add("is-dark");
+                                    } else {
+                                        button.classList.remove("is-dark");
+                                    }
+                                });
+                        </script>
+                    </button>
+                    <button class="button is-text navbar-item">
+                        <img
+                            src="./img/x.svg"
+                            class="invert"
+                            id="closeMainWindow"
+                        />
                     </button>
                 </div>
             </div>

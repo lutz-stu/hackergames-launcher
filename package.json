@@ -43,6 +43,7 @@
       "styles.css",
       "main.js",
       "renderer.js",
+      "settingsRenderer.js",
       "preload.js",
       "img/*"
     ]

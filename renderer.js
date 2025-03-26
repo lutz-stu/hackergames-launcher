@@ -1,13 +1,18 @@
-const fs = require('fs');
-const https = require('https');
-const extract = require('extract-zip');
-const path = require('path');
-const os = require('os');
-const { exec } = require('child_process');
-const { ipcRenderer, shell } = require('electron');
+const fs = require("fs");
+const https = require("https");
+const extract = require("extract-zip");
+const path = require("path");
+const os = require("os");
+const { exec } = require("child_process");
+const { ipcRenderer, shell } = require("electron");
 
-
-const gameDir = path.join(os.homedir(), 'AppData', 'Local', 'HackergamesLauncher', 'games');
+const gameDir = path.join(
+    os.homedir(),
+    "AppData",
+    "Local",
+    "HackergamesLauncher",
+    "games"
+);
 
 // Function to ensure the directory exists
 function ensureGameDirExists() {
@@ -18,7 +23,11 @@ function ensureGameDirExists() {
 
 function showLoadingWindow() {
     // Open a new window
-    const loadingWindow = window.open("", "loadingWindow", "width=300,height=200,autoHideMenuBar=true");
+    const loadingWindow = window.open(
+        "",
+        "loadingWindow",
+        "width=300,height=200,autoHideMenuBar=true"
+    );
 
     // Set the content of the window
     loadingWindow.document.write(`
@@ -60,27 +69,32 @@ function showLoadingWindow() {
 }
 
 const gameNames = [
-    'CubeSmash',
-    'SpaceCollector',
-    'JustKlick',
-    'Little-Farming-Game',
-    'Easteregg-Hunt',
-    'TrollAdventure',
-    'EscapeTheSpike'
+    "CubeSmash",
+    "SpaceCollector",
+    "JustKlick",
+    "Little-Farming-Game",
+    "Easteregg-Hunt",
+    "TrollAdventure",
+    "EscapeTheSpike",
 ];
 
 // Function to load the game versions
 function loadGameVersions() {
     gameNames.forEach((gameName) => {
-        const versionFilePath = path.join(gameDir, gameName, 'version.txt');
-        const versionElement = document.querySelector(`#version-subtitle-${gameName}`);
+        const versionFilePath = path.join(gameDir, gameName, "version.txt");
+        const versionElement = document.querySelector(
+            `#version-subtitle-${gameName}`
+        );
 
-        if (versionElement) { // Check if the element exists
+        if (versionElement) {
+            // Check if the element exists
             if (fs.existsSync(versionFilePath)) {
-                const version = fs.readFileSync(versionFilePath, 'utf-8').trim();
+                const version = fs
+                    .readFileSync(versionFilePath, "utf-8")
+                    .trim();
                 versionElement.textContent = `v${version}`;
             } else {
-                versionElement.textContent = 'Not installed';
+                versionElement.textContent = "Not installed";
             }
         }
     });
@@ -88,18 +102,27 @@ function loadGameVersions() {
 
 // Function to check the version and update the game
 function checkForUpdate(gameName, downloadUrl, callback) {
-    const localVersionFile = path.join(gameDir, gameName, 'version.txt');
-    const onlineVersionUrl = `${downloadUrl.replace(/\.zip$/, '')}/version.txt`;
+    const localVersionFile = path.join(gameDir, gameName, "version.txt");
+    const onlineVersionUrl = `${downloadUrl.replace(/\.zip$/, "")}/version.txt`;
 
     https.get(onlineVersionUrl, (response) => {
-        let onlineVersion = '';
-        response.on('data', (chunk) => onlineVersion += chunk);
-        response.on('end', () => {
-            const localVersion = fs.existsSync(localVersionFile) ? fs.readFileSync(localVersionFile, 'utf-8') : '0.0.0';
+        let onlineVersion = "";
+        response.on("data", (chunk) => (onlineVersion += chunk));
+        response.on("end", () => {
+            const localVersion = fs.existsSync(localVersionFile)
+                ? fs.readFileSync(localVersionFile, "utf-8")
+                : "0.0.0";
             if (onlineVersion.trim() !== localVersion.trim()) {
-                const update = window.confirm(`A new version of ${gameName} is available. Update now?`);
+                const update = window.confirm(
+                    `A new version of ${gameName} is available. Update now?`
+                );
                 if (update) {
-                    downloadAndInstallGame(gameName, downloadUrl, onlineVersion.trim(), callback);
+                    downloadAndInstallGame(
+                        gameName,
+                        downloadUrl,
+                        onlineVersion.trim(),
+                        callback
+                    );
                 } else {
                     callback();
                 }
@@ -121,16 +144,21 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
     const file = fs.createWriteStream(zipPath);
     https.get(downloadUrl, (response) => {
         response.pipe(file);
-        file.on('finish', () => {
+        file.on("finish", () => {
             file.close();
             extract(zipPath, { dir: gamePath })
                 .then(() => {
-                    fs.writeFileSync(path.join(gamePath, 'version.txt'), version); // Save the version
+                    fs.writeFileSync(
+                        path.join(gamePath, "version.txt"),
+                        version
+                    ); // Save the version
                     fs.unlinkSync(zipPath);
                     loadGameVersions();
                     // Close the loading window when the download and installation are complete
                     loadingWindow.close();
-                    window.alert(`${gameName} has been successfully installed.`);
+                    window.alert(
+                        `${gameName} has been successfully installed.`
+                    );
                     callback();
                 })
                 .catch((err) => {
@@ -145,16 +173,26 @@ function downloadAndInstallGame(gameName, downloadUrl, version, callback) {
 function launchGame(gameName, downloadUrl) {
     const gameExePath = path.join(gameDir, gameName, `${gameName}.exe`);
     if (!fs.existsSync(gameExePath)) {
-        const onlineVersionUrl = `${downloadUrl.replace(/\.zip$/, '')}/version.txt`;
+        const onlineVersionUrl = `${downloadUrl.replace(
+            /\.zip$/,
+            ""
+        )}/version.txt`;
         https.get(onlineVersionUrl, (response) => {
-            let onlineVersion = '';
-            response.on('data', (chunk) => onlineVersion += chunk);
-            response.on('end', () => {
-                const download = window.confirm(`${gameName} is not installed. Would you like to download it?`);
+            let onlineVersion = "";
+            response.on("data", (chunk) => (onlineVersion += chunk));
+            response.on("end", () => {
+                const download = window.confirm(
+                    `${gameName} is not installed. Would you like to download it?`
+                );
                 if (download) {
-                    downloadAndInstallGame(gameName, downloadUrl, onlineVersion.trim(), () => {
-                        // Game will not auto-launch after installation
-                    });
+                    downloadAndInstallGame(
+                        gameName,
+                        downloadUrl,
+                        onlineVersion.trim(),
+                        () => {
+                            // Game will not auto-launch after installation
+                        }
+                    );
                 }
             });
         });
@@ -170,7 +208,7 @@ function launchGame(gameName, downloadUrl) {
 // Function to uninstall a game
 function uninstallGame(gameName) {
     const gamePath = path.join(gameDir, gameName);
-    
+
     if (fs.existsSync(gamePath)) {
         fs.rm(gamePath, { recursive: true, force: true }, (err) => {
             if (err) {
@@ -186,41 +224,44 @@ function uninstallGame(gameName) {
 }
 
 // URL for the hosted version file (or GitHub as fallback)
-const hostedVersionUrl = 'https://hackergames.netlify.app/launcher/version.txt';
-const githubReleaseUrl = 'https://github.com/lutz-stu/hackergames-launcher/releases/download';
+const hostedVersionUrl = "https://hackergames.netlify.app/launcher/version.txt";
+const githubReleaseUrl =
+    "https://github.com/lutz-stu/hackergames-launcher/releases/download";
 
 // Get the current launcher version from the main process
 async function getCurrentLauncherVersion() {
-    return await ipcRenderer.invoke('get-app-version'); // Requests version from main process
+    return await ipcRenderer.invoke("get-app-version"); // Requests version from main process
 }
 
 function downloadInstaller(downloadUrl, savePath, callback) {
     const file = fs.createWriteStream(savePath);
 
-    https.get(downloadUrl, (response) => {
-        response.pipe(file);
+    https
+        .get(downloadUrl, (response) => {
+            response.pipe(file);
 
-        file.on('finish', () => {
-            file.close(callback); // Call the callback once download completes
+            file.on("finish", () => {
+                file.close(callback); // Call the callback once download completes
+            });
+        })
+        .on("error", (err) => {
+            console.error(`Download error: ${err}`);
+            fs.unlink(savePath, () => {}); // Delete the file on error
         });
-    }).on('error', (err) => {
-        console.error(`Download error: ${err}`);
-        fs.unlink(savePath, () => {}); // Delete the file on error
-    });
 }
 
 function displayUpdateMessage(onlineVersion, currentVersion) {
-    const placeholder = document.getElementById('update-message-placeholder');
+    const placeholder = document.getElementById("update-message-placeholder");
 
     // Check if the message already exists
-    if (document.getElementById('update-message')) {
+    if (document.getElementById("update-message")) {
         return; // If it exists, do nothing
     }
 
     // Create the message element with version details
-    const messageElement = document.createElement('section');
-    messageElement.className = 'section';
-    messageElement.id = 'update-message';
+    const messageElement = document.createElement("section");
+    messageElement.className = "section";
+    messageElement.id = "update-message";
     messageElement.innerHTML = `
         <article class="message is-warning">
             <div class="message-header">
@@ -238,16 +279,19 @@ function displayUpdateMessage(onlineVersion, currentVersion) {
     placeholder.appendChild(messageElement);
 
     // Add click event listener to the delete button to remove the message
-    const deleteButton = messageElement.querySelector('.delete');
-    deleteButton.addEventListener('click', () => {
+    const deleteButton = messageElement.querySelector(".delete");
+    deleteButton.addEventListener("click", () => {
         messageElement.remove();
     });
 
     // Add click event listener to the message body to start download and installation
-    const messageBody = messageElement.querySelector('.message-body');
-    messageBody.addEventListener('click', () => {
+    const messageBody = messageElement.querySelector(".message-body");
+    messageBody.addEventListener("click", () => {
         const downloadUrl = `https://hackergames.netlify.app/launcher/HACKERGAMES-Launcher-latest-windows-installer.exe`;
-        const savePath = path.join(os.tmpdir(), 'HACKERGAMES-Launcher-latest-windows-installer.exe');
+        const savePath = path.join(
+            os.tmpdir(),
+            "HACKERGAMES-Launcher-latest-windows-installer.exe"
+        );
 
         const loadingWindow = showLoadingWindow(); // Show loading window
         downloadInstaller(downloadUrl, savePath, () => {
@@ -264,59 +308,57 @@ function displayUpdateMessage(onlineVersion, currentVersion) {
 }
 
 async function checkForLauncherUpdate() {
-    https.get(hostedVersionUrl, (response) => {
-        let onlineVersion = '';
-        response.on('data', (chunk) => (onlineVersion += chunk));
-        response.on('end', async () => { // Make the callback async
-            onlineVersion = onlineVersion.trim();
+    https
+        .get(hostedVersionUrl, (response) => {
+            let onlineVersion = "";
+            response.on("data", (chunk) => (onlineVersion += chunk));
+            response.on("end", async () => {
+                // Make the callback async
+                onlineVersion = onlineVersion.trim();
 
-            // Retrieve the current version and await the result
-            const currentVersion = await getCurrentLauncherVersion();
+                // Retrieve the current version and await the result
+                const currentVersion = await getCurrentLauncherVersion();
 
-            console.log(currentVersion);
-            console.log(onlineVersion);
+                console.log(currentVersion);
+                console.log(onlineVersion);
 
-            if (onlineVersion && onlineVersion !== currentVersion) {
-                displayUpdateMessage(onlineVersion, currentVersion); // Show update message with versions
-            }
+                if (onlineVersion && onlineVersion !== currentVersion) {
+                    displayUpdateMessage(onlineVersion, currentVersion); // Show update message with versions
+                }
+            });
+        })
+        .on("error", (err) => {
+            console.error(`Error checking for updates: ${err}`);
         });
-    }).on('error', (err) => {
-        console.error(`Error checking for updates: ${err}`);
-    });
 }
 
 // Event listener for the settings button
-document.getElementById('openSettings').addEventListener('click', () => {
-    ipcRenderer.send('open-settings-window');
+document.getElementById("openSettings").addEventListener("click", () => {
+    ipcRenderer.send("open-settings-window");
 });
-
-
 
 console.log("Launcher started");
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener("DOMContentLoaded", (event) => {
     loadGameVersions();
     checkForLauncherUpdate(); // Check for a new launcher version
 
     // Open GitHub Link in the default Browser
-    const githubLink = document.getElementById('github-link');
+    const githubLink = document.getElementById("github-link");
     if (githubLink) {
-        githubLink.addEventListener('click', (e) => {
+        githubLink.addEventListener("click", (e) => {
             e.preventDefault(); // Prevents the link from opening in the Electron window
             shell.openExternal(githubLink.href); // Opens in the default browser
         });
     }
 
-    console.log("DOMContentLoaded triggered");
-    const closeSettingsButton = document.getElementById("closeSettings");
-    console.log("closeSettingsButton:", closeSettingsButton);
-
-    if (closeSettingsButton) {
-        closeSettingsButton.addEventListener("click", () => {
-            window.electron.send("closeSettingsWindow");
-            console.log("closeSettingsWindow");
-        });
-    } else {
-        console.log("Element #closeSettings nicht gefunden");
-    }
+    // Event listener for closeMainWindow
+    document.getElementById("closeMainWindow")?.addEventListener("click", () => {
+        ipcRenderer.send("closeMainWindow");
+    });
+    
+    // Event listener for closeSettings
+    document.getElementById("closeSettings")?.addEventListener("click", () => {
+        ipcRenderer.send("closeSettingsWindow");
+    });    
 });

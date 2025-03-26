@@ -8,8 +8,8 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1280,
         height: 825,
-        minWidth: 800,
-        minHeight: 600,
+        minWidth: 1040,
+        minHeight: 650,
         autoHideMenuBar: true,
         icon: path.join(__dirname, 'img', 'app-icon-invert.ico'),
         webPreferences: {
@@ -22,6 +22,12 @@ function createWindow() {
 
     mainWindow.loadFile('index.html');
 }
+
+ipcMain.on("closeMainWindow", () => {
+    if (mainWindow) {
+        mainWindow.close();
+    }
+});
 
 // Create the main window when the app is ready
 app.on('ready', createWindow);
